@@ -1,0 +1,143 @@
+.admin_panel
+    height: 100vh
+
+    &.auth
+        display: flex
+        justify-content: center
+        align-items: center
+
+    #auth
+        background: #000000
+        width: 100%
+        max-width: 300px
+        padding: 30px
+
+        input
+            display: block
+            width: 100%
+            padding: 0.5rem
+            border: none
+            margin: 1rem 0
+            box-sizing: border-box
+
+            &[type="submit"]
+                background: #3391C4
+                color: #ffffff
+                cursor: pointer
+    #sidebar
+        height: 100vh
+        width: 30%
+        max-width: 250px
+        background: #000000
+        float: left
+        position: relative
+
+        .button
+            padding: 0.5rem
+            padding-left: 2rem
+            cursor: pointer
+            color: #E2E2E2
+
+            &.active
+                background: #52A3EA
+                color: #ffffff
+        .category
+            display: block
+            padding: 0.5rem 1rem
+            color: #FFFFFF
+        #main_page
+            position: absolute
+            bottom: 0
+            text-align: center
+            width: 250px
+            box-sizing: border-box
+            padding: 1rem
+            a
+                color: #fff
+    #main_area
+        height: 100vh
+        margin-left: 250px
+        
+        .page
+            display: none
+            &.active
+                display: block
+                padding: 1rem
+                box-sizing: border-box
+                height: 100vh
+            &#posts
+                background: #f4f8fb
+                .post
+                    cursor: pointer
+                    margin: 2rem 0
+                    padding: 1rem
+                    box-sizing: border-box
+                    background: #ffffff
+                    border-radius: 4px
+                    box-shadow: 7px 14px 38px rgba(44,44,44,0.06)
+                    transition: box-shadow 300ms ease
+
+                    &:hover
+                        box-shadow: 7px 14px 38px rgba(44,44,44,0.18)
+                        
+                    .title
+                        display: block
+                        font-weight: bold
+                        font-size: 1.2rem
+                        margin-bottom: 0.5rem
+                    .body
+                        display: none
+                    .publish_status
+                        margin-top: 0.5rem
+                        font-size: 0.9rem
+                        display: block
+            &#new_post, &#update_post
+                width: 80%
+                max-width: 1020px
+                margin: 0 auto
+                input[name='title']
+                    font-size: 1.2rem
+                    display: block
+                    border: none
+                    padding: 1rem
+                    padding-left: 0
+                    font-weight: bold
+                    margin-bottom: 0.5rem
+                    color: #000
+                textarea
+                    font-size: 1rem
+                    border: none
+                    padding: 1rem
+                    padding-left: 0
+                    color: #000
+                    resize: none
+                    display: block
+                    width: 100%
+                    box-sizing: border-box
+                    line-height: 2
+                    
+                    &[name='body']
+                        border-top: 1px dashed rgba(0,0,0,0.3)
+                        height: 70vh
+                        
+                button
+                    border: none
+                    padding: 0.5rem
+                    cursor: pointer
+                    &[value='false']
+                        background: #3391C4
+                        color: #ffffff
+                        cursor: pointer
+                    &[value='true']
+                        background: #34C17B
+                        color: #ffffff
+                        cursor: pointer
+                    &.unpublish
+                        background: #828282
+                    &#delete
+                        background: #F73D4D
+            &#settings
+                .settings_not_ready
+                    font-size: 1.3rem
+                    font-weight: bold
+                    text-align: center

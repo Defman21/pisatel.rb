@@ -1,0 +1,45 @@
+- unless @is_admin
+    %div#main.admin_panel.auth
+        %form#auth{action: '/admin/auth', method: 'post'}
+            %input{name: 'login', type: 'text', placeholder: 'Login'}
+            %input{name: 'password', type: 'password', placeholder: 'Password'}
+            %input{type: 'submit', value: 'Sign in'}
+- else
+    %link{rel: "stylesheet", href: "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"}
+    %div#main.admin_panel
+        %div#sidebar
+            %span.category Content
+            %div#new_post_btn.button.active{data: {page: 'new_post'}} New post
+            %div#posts_btn.button{data: {page: 'posts'}} Posts
+            %span.category Settings
+            %div.button{data: {page: 'settings'}} General
+            %div#main_page
+                %a{href: '/'} Main page
+        %div#main_area
+            %div.page.active#new_post
+                %form{action: '/admin/posts/new', method: 'post'}
+                    %input{name: 'title', type: 'text', placeholder: 'Title'}
+                    %textarea{name: 'description', placeholder: 'Description'}
+                    %textarea#new_post_body{name: 'body', placeholder: 'Text'}
+                    %button{type: 'submit', name: 'published', value: 'false'} Save
+                    %button{type: 'submit', name: 'published', value: 'true'} Publish
+            %div.page#update_post
+                %form{action: '/admin/posts/update', method: 'post'}
+                    %input#post_id{name: 'id', type: 'hidden', value: '&placeholder'}
+                    %input#post_title{name: 'title', type: 'text', placeholder: 'Title'}
+                    %textarea#post_desc{name: 'description', placeholder: 'Description'}
+                    %textarea#post_body{name: 'body', placeholder: 'Text'}
+                    %button#draft{type: 'submit', name: 'published', value: 'false'} Save
+                    %button#publish{type: 'submit', name: 'published', value: 'true'} Update & Publish
+                    %button#delete{type: 'sumbit', name: 'delete', value: 'true'} Delete
+            %div.page#posts
+                - @posts.each do |post|
+                    %div.post{data: {post: Oj.dump(post)}}
+                        %span.title= post['title']
+                        %span.description= post['description']
+                        %div.body= markdown post['body']
+                        %span.publish_status= "#{post['published'] ? 'P' : 'Unp'}ublished"
+            %div.page#settings
+                %div.settings_not_ready
+                    Please edit your /app/config.yaml file. This page is not ready yet.
+

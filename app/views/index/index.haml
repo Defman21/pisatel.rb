@@ -1,0 +1,16 @@
+%div#main.cards
+    %div#header
+        %div#blog_info
+            %span#blog_name= @site['name']
+            %span#blog_description= @site['description']
+        %div.container#menu
+            - @site['links'].each do |link|
+                %a.link#menu_link{href: link['href']}= link['text']
+
+    %div#cards.container
+        - @posts.each do |post|
+            %div.card
+                %a{href: "/posts/#{post['id']}"}
+                    %span.title= post['title']
+                    %div.description= post['description']
+

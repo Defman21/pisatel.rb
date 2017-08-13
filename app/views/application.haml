@@ -1,0 +1,13 @@
+!!!
+%head
+    %title= @site['name']
+    %link{rel: 'stylesheet', href: stylesheet_path('app')}
+    - unless @stylesheets.nil?
+        - @stylesheets.each do |style|
+            %link{rel: 'stylesheet', href: stylesheet_path(style)}
+    %script{src: javascript_path('app')}
+    - unless @javascripts.nil?
+        - @javascripts.each do |script|
+            %script{src: javascript_path(script)}
+
+%body= yield
