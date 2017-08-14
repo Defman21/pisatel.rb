@@ -3,3 +3,4 @@ tmp/
 *.komodoproject
 .sass-cache
 config.yaml
+public/

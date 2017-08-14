@@ -1,16 +1,14 @@
 class ApplicationController < Sinatra::Base
-  set :root, File.expand_path('../../', __FILE__)
+  set :root, File.expand_path('../../../', __FILE__)
+  set :app_root, File.join(root, 'app')
   
   set :sprockets, Sprockets::Environment.new(root)
   set :assets_prefix, '/assets'
-  set :assets_path, '/public'
+  set :assets_path, File.join(root, '/public', assets_prefix)
   
   configure do
-    sprockets.append_path File.join(root, 'assets', 'stylesheets')
-    sprockets.append_path File.join(root, 'assets', 'javascripts')
-  
-    sprockets.js_compressor  = :uglify
-    sprockets.css_compressor = :sass
+    sprockets.append_path File.join(app_root, 'assets', 'stylesheets')
+    sprockets.append_path File.join(app_root, 'assets', 'javascripts')
     
     Sprockets::Helpers.configure do |config|
       config.environment = sprockets
@@ -18,6 +16,9 @@ class ApplicationController < Sinatra::Base
       config.debug       = true if development?
       
       if production?
+        unless File.directory? assets_path
+          Logging::Logger.warn 'Assets are not compiled! Run rake assets:precompile and restart the application'
+        end
         config.digest = true
         config.manifest = Sprockets::Manifest.new(sprockets, File.join(assets_path, 'manifest.json'))
       end
@@ -35,7 +36,7 @@ class ApplicationController < Sinatra::Base
 
   set :haml, format: :html5
   set :views, File.expand_path('../../views', __FILE__)
-  set :site, YAML.load_file(File.join(root, 'config.yaml'))
+  set :site, YAML.load_file(File.join(app_root, 'config.yaml'))
 
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',

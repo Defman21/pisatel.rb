@@ -23,6 +23,9 @@ require 'graphql/batch'
 
 module Logging  
   Logger = ::Logger.new $stdout
+  if ENV['RACK_ENV'] == 'production'
+    Logger.level = :info
+  end
   Logger.datetime_format = '%Y-%d-%m %H:%M:%S'
   Logger.formatter = -> (severity, datetime, progname, msg) {
     unless progname.nil?
