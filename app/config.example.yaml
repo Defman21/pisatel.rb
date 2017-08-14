@@ -15,3 +15,10 @@ admin:
 endpoints:
     graphql:
         type: private # set to public to allow requests to /graphql
+js_injection:
+    post: |
+        console.log("This code will be executed when someone will visit /post/:id");
+        console.log($post);
+    index: |
+        console.log("This code will be executed when someon will visit /");
+        console.log('hello world');

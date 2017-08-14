@@ -15,3 +15,8 @@
             %script{src: javascript_path(script)}
     - else
         %script{src: javascript_path('app')}
+    - unless @js_injection.nil?
+        :javascript
+            (($post) => {
+                #{@js_injection}
+            }).call(this, typeof $post !== 'undefined' ? $post : [])

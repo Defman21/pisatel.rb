@@ -10,6 +10,7 @@ query {
   }
 }
 |
+    @js_injection = @site['js_injection']['index']
     haml :'index/index', layout: :application
   end
 
@@ -18,6 +19,7 @@ query {
     @post = GraphQLService.query 'post', %|
 query {
   post(id: #{id}) {
+    id
     title
     body
     description
@@ -29,6 +31,7 @@ query {
     else
       @post['body'] = MD.render @post['body']
     end
+    @js_injection = @site['js_injection']['post']
     haml :'index/post', layout: :application
   end
 
