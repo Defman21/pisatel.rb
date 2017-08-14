@@ -1,143 +1,177 @@
-.admin_panel
+@import 'variables'
+
+.admin-panel
     height: 100vh
 
     &.auth
-        display: flex
         justify-content: center
         align-items: center
+        display: flex
 
     #auth
-        background: #000000
-        width: 100%
+        background: $background
         max-width: 300px
         padding: 30px
+        width: 100%
 
         input
-            display: block
-            width: 100%
-            padding: 0.5rem
-            border: none
-            margin: 1rem 0
             box-sizing: border-box
+            display: block
+            border: none
+            padding: 0.5rem
+            margin: 1rem 0
+            width: 100%
 
             &[type="submit"]
-                background: #3391C4
-                color: #ffffff
+                background: $button-submit-background
+                color: $button-submit-foreground
                 cursor: pointer
+
     #sidebar
+        background: $sidebar-background
+        position: relative
+        float: left
+        max-width: 250px
         height: 100vh
         width: 30%
-        max-width: 250px
-        background: #000000
-        float: left
-        position: relative
 
         .button
-            padding: 0.5rem
-            padding-left: 2rem
-            cursor: pointer
-            color: #E2E2E2
+            color: $sidebar-foreground
+            
+            a
+                display: block
+                color: inherit
+                padding: 0.5rem 0.5rem 0.5rem 2rem
 
             &.active
-                background: #52A3EA
-                color: #ffffff
+                background: $sidebar-active-background
+                color: $sidebar-active-foreground
+        
         .category
+            color: $sidebar-category
             display: block
             padding: 0.5rem 1rem
-            color: #FFFFFF
-        #main_page
-            position: absolute
-            bottom: 0
-            text-align: center
-            width: 250px
+        
+        #main-page
             box-sizing: border-box
+            position: absolute
+            text-align: center
             padding: 1rem
+            width: 250px
+            bottom: 0
+            
             a
-                color: #fff
-    #main_area
-        height: 100vh
+                color: $sidebar-foreground
+
+    #main-area
         margin-left: 250px
+        height: 100vh
         
         .page
             display: none
+            
             &.active
+                box-sizing: border-box
                 display: block
                 padding: 1rem
-                box-sizing: border-box
                 height: 100vh
+            
             &#posts
-                background: #f4f8fb
+                background: $cards-background
+                
                 .post
-                    cursor: pointer
-                    margin: 2rem 0
-                    padding: 1rem
-                    box-sizing: border-box
-                    background: #ffffff
-                    border-radius: 4px
+                    background: $card-background
                     box-shadow: 7px 14px 38px rgba(44,44,44,0.06)
                     transition: box-shadow 300ms ease
+                    border-radius: 4px
+                    margin: 2rem 0
+                    
+                    a
+                        color: $card-foreground
+                        box-sizing: border-box
+                        display: block
+                        padding: 1rem
 
                     &:hover
                         box-shadow: 7px 14px 38px rgba(44,44,44,0.18)
                         
+                        .publish-status
+                            opacity: 1
+                        
                     .title
-                        display: block
+                        font-size: $font-size-x
                         font-weight: bold
-                        font-size: 1.2rem
-                        margin-bottom: 0.5rem
-                    .body
-                        display: none
-                    .publish_status
-                        margin-top: 0.5rem
-                        font-size: 0.9rem
                         display: block
-            &#new_post, &#update_post
-                width: 80%
-                max-width: 1020px
+                        margin-bottom: 0.5rem
+                    
+                    .publish-status
+                        font-size: $font-size-s
+                        display: block
+                        margin-top: 0.5rem
+                        opacity: 0.7
+                        
+                        &.published
+                            color: $published-status-published
+                        
+                        &.unpublished
+                            color: $published-status-unpublished
+            
+            &#new-post, &#update-post
+                max-width: $container-max-width
+                width: $container-width
                 margin: 0 auto
+                
+                .CodeMirror
+                    border: none
+                    padding: 0
+                    height: 60vh
+                
                 input[name='title']
-                    font-size: 1.2rem
-                    display: block
-                    border: none
-                    padding: 1rem
-                    padding-left: 0
+                    font-size: $font-size-x
+                    color: $foreground
                     font-weight: bold
-                    margin-bottom: 0.5rem
-                    color: #000
-                textarea
-                    font-size: 1rem
-                    border: none
-                    padding: 1rem
-                    padding-left: 0
-                    color: #000
-                    resize: none
                     display: block
-                    width: 100%
+                    border: none
+                    padding: 1rem 1rem 1rem 0
+                    margin-bottom: 0.5rem
+                
+                textarea
                     box-sizing: border-box
+                    font-family: inherit
+                    color: $foreground
+                    display: block
+                    border: none
+                    resize: none
+                    padding: 1rem 1rem 1rem 0
+                    font-size: 1rem
                     line-height: 2
+                    width: 100%
                     
                     &[name='body']
                         border-top: 1px dashed rgba(0,0,0,0.3)
                         height: 70vh
                         
                 button
-                    border: none
-                    padding: 0.5rem
                     cursor: pointer
-                    &[value='false']
-                        background: #3391C4
-                        color: #ffffff
-                        cursor: pointer
-                    &[value='true']
-                        background: #34C17B
-                        color: #ffffff
-                        cursor: pointer
-                    &.unpublish
-                        background: #828282
+                    border: none
+                    margin-top: 1rem
+                    padding: 0.5rem
+                        
+                    &.publish
+                        background: $button-submit-background
+                        color: $button-submit-foreground
+                        
+                    &.draft
+                        background: $button-draft-background
+                        color: $button-draft-foreground
+                        
                     &#delete
-                        background: #F73D4D
+                        background: $button-delete-background
+                        color: $button-delete-foreground
+                    
             &#settings
-                .settings_not_ready
-                    font-size: 1.3rem
-                    font-weight: bold
+            
+                #settings-not-ready
+                    font-size: $font-size-xx
                     text-align: center
+                    font-weight: bold

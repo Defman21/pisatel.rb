@@ -72,6 +72,17 @@ module Logging
   end
 end
 
+module MD
+  Render = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true, prettify: true),
+                                   fenced_code_blocks: true,
+                                   smartypants: true,
+                                   no_intra_emphasis: true,
+                                   disable_indented_code_blocks: true)
+  def self.render(text)
+    Render.render text
+  end
+end
+
 require './db/database'
 
 Dir.glob('./db/models/*.rb').each do |model|

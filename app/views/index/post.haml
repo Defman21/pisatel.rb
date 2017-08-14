@@ -1,19 +1,16 @@
+:javascript
+    $post = #{Oj.dump @post}
+
 %div#main
-    %div#header__small
+    %div#header-small
         %div.container
-            %span#blog__name
-                %a{href: '/'}= @site['name']
+            %span#blog-name
+                %a(href='/')= @site['name']
             %div#links
                 - @site['links'].each do |link|
                     %a.link#menu_link{href: link['href']}= link['text']
-    %div#post.container
-        - unless @post.nil?
-            %span#title= @post['title']
-            %div#body
-                %div#description= @post['description']
-                = markdown @post['body']
-        - else
-            %span#title= "Post ##{@id} not found"
-            %div#body
-                Sorry about that.
-                %a{href: '/'} Go to the main page.
+    %div#post.container.app(v-cloak)
+        %span#title {{ post.title }}
+        %div#body
+            %div#description {{ post.description }}
+            %div(v-html='post.body')

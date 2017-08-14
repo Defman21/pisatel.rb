@@ -5,9 +5,12 @@
     - unless @stylesheets.nil?
         - @stylesheets.each do |style|
             %link{rel: 'stylesheet', href: stylesheet_path(style)}
-    %script{src: javascript_path('app')}
+
+%body
+    = yield
+    %script(src='//unpkg.com/vue')
     - unless @javascripts.nil?
         - @javascripts.each do |script|
             %script{src: javascript_path(script)}
-
-%body= yield
+    - else
+        %script{src: javascript_path('app')}

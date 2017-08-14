@@ -28,19 +28,9 @@ class ApplicationController < Sinatra::Base
     sprockets.cache = Sprockets::Cache::FileStore.new('./tmp')
     use Logging::RackLogger, Logging::Logger
   end
-  
-  Markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(escape_html: true, prettify: true),
-                                     fenced_code_blocks: true,
-                                     smartypants: true,
-                                     no_intra_emphasis: true,
-                                     disable_indented_code_blocks: true)
-  
+
   helpers do
     include Sprockets::Helpers
-    
-    def markdown(text)
-      find_and_preserve Markdown.render text
-    end
   end
 
   set :haml, format: :html5

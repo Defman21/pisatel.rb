@@ -1,45 +1,80 @@
 - unless @is_admin
-    %div#main.admin_panel.auth
-        %form#auth{action: '/admin/auth', method: 'post'}
-            %input{name: 'login', type: 'text', placeholder: 'Login'}
-            %input{name: 'password', type: 'password', placeholder: 'Password'}
-            %input{type: 'submit', value: 'Sign in'}
+    %div#main.admin-panel.auth
+        %form#auth(action='/admin/auth' method='post')
+            %input(name='login' type='text' placeholder='Login')
+            %input(name='password' type='password' placeholder='Password')
+            %input(type='submit' value='Sign in')
 - else
-    %link{rel: "stylesheet", href: "https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"}
-    %div#main.admin_panel
+    :javascript
+        $posts = #{Oj.dump @posts}
+    %link(rel='stylesheet'
+          href='https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css')
+    %div#main.admin-panel
         %div#sidebar
             %span.category Content
-            %div#new_post_btn.button.active{data: {page: 'new_post'}} New post
-            %div#posts_btn.button{data: {page: 'posts'}} Posts
+            %div.button(:class='currentButton("new-post")')
+                %a(href='#page=new-post') New post
+            %div.button(:class='currentButton("posts")')
+                %a(href='#page=posts') Posts
             %span.category Settings
-            %div.button{data: {page: 'settings'}} General
-            %div#main_page
-                %a{href: '/'} Main page
-        %div#main_area
-            %div.page.active#new_post
-                %form{action: '/admin/posts/new', method: 'post'}
-                    %input{name: 'title', type: 'text', placeholder: 'Title'}
-                    %textarea{name: 'description', placeholder: 'Description'}
-                    %textarea#new_post_body{name: 'body', placeholder: 'Text'}
-                    %button{type: 'submit', name: 'published', value: 'false'} Save
-                    %button{type: 'submit', name: 'published', value: 'true'} Publish
-            %div.page#update_post
-                %form{action: '/admin/posts/update', method: 'post'}
-                    %input#post_id{name: 'id', type: 'hidden', value: '&placeholder'}
-                    %input#post_title{name: 'title', type: 'text', placeholder: 'Title'}
-                    %textarea#post_desc{name: 'description', placeholder: 'Description'}
-                    %textarea#post_body{name: 'body', placeholder: 'Text'}
-                    %button#draft{type: 'submit', name: 'published', value: 'false'} Save
-                    %button#publish{type: 'submit', name: 'published', value: 'true'} Update & Publish
-                    %button#delete{type: 'sumbit', name: 'delete', value: 'true'} Delete
-            %div.page#posts
-                - @posts.each do |post|
-                    %div.post{data: {post: Oj.dump(post)}}
-                        %span.title= post['title']
-                        %span.description= post['description']
-                        %div.body= markdown post['body']
-                        %span.publish_status= "#{post['published'] ? 'P' : 'Unp'}ublished"
-            %div.page#settings
-                %div.settings_not_ready
+            %div.button(:class='currentButton("settings")')
+                %a(href='#page=settings') General
+            %div#main-page
+                %a(href='/') Main page
+        %div#main-area
+            %div.page#new-post(:class='currentPage("new-post")')
+                %form(action='/admin/posts/new'
+                      method='post')
+                    %input(name='title'
+                           type='text'
+                           placeholder='Title')
+                    %textarea(name='description'
+                              placeholder='Description')
+                    %textarea#new-post-body(name='body'
+                                            placeholder='Text')
+                    %button.draft(type='submit'
+                            name='published'
+                            value='false')
+                        Save
+                    %button.publish(type='submit'
+                            name='published'
+                            value='true')
+                        Publish
+            %div.page#update-post(:class='currentPage("update-post")')
+                %form(action='/admin/posts/update'
+                      method='post')
+                    %input#post-id(name='id'
+                                   type='hidden'
+                                   :value='post.id')
+                    %input#post-title(name='title'
+                                      type='text'
+                                      placeholder='Title'
+                                      :value='post.title')
+                    %textarea#post-desc(name='description'
+                                        placeholder='Description'
+                                        :value='post.description')
+                    %textarea#update-post-body(name='body'
+                                               placeholder='Text')
+                    %button.draft(type='submit'
+                                  name='published'
+                                  value='false')
+                        {{ actions.draft }}
+                    %button.publish(type='submit'
+                                    name='published'
+                                    value='true')
+                        {{ actions.publish }}
+                    %button#delete(type='sumbit'
+                                   name='delete'
+                                   value='true')
+                        Delete
+            %div.page#posts(:class='currentPage("posts")')
+                %div.post(v-for='post in posts' v-cloak)
+                    %a(:href='"#post=" + post.id')
+                        %span.title {{ post.title }}
+                        %span.description {{ post.description }}
+                        %span.publish-status(:class='publishStatus(post.published)')
+                            {{ post.published? 'Published' : 'Unpublished' }}
+            %div.page#settings(:class='currentPage("settings")')
+                %div#settings-not-ready
                     Please edit your /app/config.yaml file. This page is not ready yet.
 

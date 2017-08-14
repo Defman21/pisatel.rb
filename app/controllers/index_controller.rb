@@ -26,6 +26,8 @@ query {
 |
     if @post.nil?
       @id = id
+    else
+      @post['body'] = MD.render @post['body']
     end
     haml :'index/post', layout: :application
   end
