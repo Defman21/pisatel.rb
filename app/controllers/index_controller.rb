@@ -10,7 +10,9 @@ query {
   }
 }
 |
-    @js_injection = @site['js_injection']['index']
+    unless @site['js_injection'].nil?
+      @js_injection = @site['js_injection']['index']
+    end
     haml :'index/index', layout: :application
   end
 
@@ -31,7 +33,9 @@ query {
     else
       @post['body'] = MD.render @post['body']
     end
-    @js_injection = @site['js_injection']['post']
+    unless @site['js_injection'].nil?
+      @js_injection = @site['js_injection']['post']
+    end
     haml :'index/post', layout: :application
   end
 
