@@ -12,10 +12,6 @@ posts:
 admin:
     login: login
     password: "password"
-db:
-    type: sqlite3
-    login:
-    password:
 endpoints:
     graphql:
         type: private # set to public to allow requests to /graphql
