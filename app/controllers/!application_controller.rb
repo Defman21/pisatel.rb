@@ -32,6 +32,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     include Sprockets::Helpers
+    include Sinatra::ContentFor
   end
 
   set :haml, format: :html5

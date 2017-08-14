@@ -1,6 +1,11 @@
 :javascript
     $posts = #{Oj.dump @posts}
-
+- content_for :og_meta do
+    %meta(name="description" content="#{@site['description']}")
+    %meta(property="og:title" content="#{@site['name']}")
+    %meta(property="og:type" content="website")
+    %meta(property="og:description" content="#{@site['description']}")
+    %meta(property="og:site_name" content="#{@site['name']}")
 %div#main.cards
     %div#header
         %div#blog-info

@@ -2,6 +2,7 @@
 %head
     %title= @site['name']
     %link{rel: 'stylesheet', href: stylesheet_path('app')}
+    = yield_content :og_meta
     - unless @stylesheets.nil?
         - @stylesheets.each do |style|
             %link{rel: 'stylesheet', href: stylesheet_path(style)}

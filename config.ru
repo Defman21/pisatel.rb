@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/json'
+require 'sinatra/content_for'
 
 require 'sprockets'
 require 'sprockets-helpers'
