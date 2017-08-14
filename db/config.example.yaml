@@ -1,0 +1,11 @@
+production: &production
+    adapter: mysql2 # postgres, sqlite, etc.
+    host: 0.0.0.0
+    port: 3306
+    database: pisatel_production
+    username: root
+    password: password
+
+development:
+    <<: *production
+    database: pisatel_development
