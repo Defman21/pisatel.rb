@@ -12,7 +12,7 @@ gem 'graphql'
 gem 'graphql-batch'
 gem 'coffee-script'
 gem 'redcarpet'
-gem 'sqlite3'
+gem 'sqlite3' # relpace with mysql2, pg, etc.
 gem 'sequel'
 gem 'oj'
 gem 'rerun', github: 'alexch/rerun'
