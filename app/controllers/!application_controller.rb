@@ -21,6 +21,9 @@ class ApplicationController < Sinatra::Base
         end
         config.digest = true
         config.manifest = Sprockets::Manifest.new(sprockets, File.join(assets_path, 'manifest.json'))
+        
+        # Let Sinatra handle /assets (./public/assets)
+        set :public_folder, File.join(root, 'public')
       end
     end
   end
@@ -28,6 +31,11 @@ class ApplicationController < Sinatra::Base
   configure :development do
     sprockets.cache = Sprockets::Cache::FileStore.new('./tmp')
     use Logging::RackLogger, Logging::Logger
+    
+    get "/assets/*" do
+      env["PATH_INFO"].sub!("/assets", "")
+      settings.sprockets.call(env)
+    end
   end
 
   helpers do

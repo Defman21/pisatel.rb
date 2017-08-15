@@ -103,4 +103,3 @@ end
 
 map('/') { run IndexController }
 map('/admin') { run AdminController }
-map('/assets') { run IndexController.sprockets }
