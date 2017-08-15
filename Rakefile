@@ -49,19 +49,15 @@ end
 namespace :server do
   task :run do
     if ENV['RACK_ENV'] == 'development'
-      IO.popen %q(bundle exec rerun \
+      exec %q(bundle exec rerun \
       -d app/controllers \
       -d app/services \
       -d db/ \
       -d ./ \
       -p "**/*.{rb,ru}" \
       -- \
-      puma -p 8000 config.ru
-      ) do |output|
-        output.each do |line|
-          puts line
-        end
-      end
+      puma -p 8080 config.ru
+      )
     else
       puts "Use bundle exec puma -C puma.rb"
     end

@@ -1,0 +1,7 @@
+tmp/
+**/*.db
+*.komodoproject
+**/.sass-cache
+**/config.yaml
+**/config.example.yaml
+public/

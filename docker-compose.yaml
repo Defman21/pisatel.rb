@@ -1,0 +1,18 @@
+version: "3"
+services:
+    pisatel:
+        build: ./
+        image: pisatel
+        container_name: pisatel
+        tty: true
+        volumes:
+            - ./db/config.yaml:/usr/src/app/db/config.yaml
+            - db:/usr/src/app/db/data/
+            - ./app/:/usr/src/app/app/
+        environment:
+            - RACK_ENV=production
+            - USE_SOCKET=0
+        ports:
+            - 8080:8080
+volumes:
+    db:
