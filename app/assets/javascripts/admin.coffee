@@ -52,7 +52,6 @@ window.app = new Vue
     publishStatus: (bool) ->
       if bool is true then 'published' else 'unpublished'
     openPost: (post) ->
-      console.log post
       return unless post?
       @post = post
       if post.published
@@ -71,8 +70,8 @@ if location.hash
   data = parseHash location.hash.substring 1
   if data.page?
     app.openPage data.page
-  else if data.post?
-    app.openPost $posts.find((post) -> post.id is data.post)
+  else
+    location.hash = '#page=new-post'
 
 window.addEventListener 'hashchange', ->
   data = parseHash location.hash.substring 1
