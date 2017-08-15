@@ -1,24 +1,23 @@
+---
 name: Your blog
 description: Give it a description
 links:
-    -
-        text: Home
-        href: /
-    -
-        text: Twitter
-        href: //twitter.com/your_account
+-   text: Home
+    href: "/"
+-   text: Twitter
+    href: "//twitter.com/your_twitter"
 posts:
     per_page: 5
 admin:
     login: login
-    password: "password"
+    password: password
 endpoints:
     graphql:
         type: private # set to public to allow requests to /graphql
 js_injection:
-    post: |
+    post: |-
         console.log("This code will be executed when someone will visit /post/:id");
         console.log(post);
-    index: |
+    index: |-
         console.log("This code will be executed when someone will visit /");
         console.log('hello world');

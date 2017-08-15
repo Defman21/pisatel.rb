@@ -44,7 +44,8 @@ For the reference, see `db/config.examlpe.yaml`.
 
 ### Site
 
-See `app/config.examlpe.yaml`.
+Copy `app/config.example.yaml` to `app/config.yaml`. You can edit it in an
+editor or in the admin panel.
 
 ### HTTPS
 
