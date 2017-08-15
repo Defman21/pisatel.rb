@@ -7,5 +7,5 @@ production: &production
     password: password
 
 development:
-    <<: *production
-    database: pisatel_development
+    <<: *production # the same settings as in the production
+    database: pisatel_development # but use another database
