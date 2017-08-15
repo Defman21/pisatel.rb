@@ -2,6 +2,8 @@ class ApplicationController < Sinatra::Base
   set :root, File.expand_path('../../../', __FILE__)
   set :app_root, File.join(root, 'app')
   
+  set :version, "0.1.0".freeze
+  
   set :sprockets, Sprockets::Environment.new(root)
   set :assets_prefix, '/assets'
   set :assets_path, File.join(root, '/public', assets_prefix)
@@ -45,7 +47,7 @@ class ApplicationController < Sinatra::Base
 
   set :haml, format: :html5
   set :views, File.expand_path('../../views', __FILE__)
-  set :site, YAML.load_file(File.join(app_root, 'config.yaml'))
+  set :site, Preferences.new(File.join(app_root, 'config.yaml'))
 
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',

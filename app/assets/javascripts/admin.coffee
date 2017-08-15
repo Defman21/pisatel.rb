@@ -79,3 +79,14 @@ window.addEventListener 'hashchange', ->
     app.openPage data.page
   else if data.post?
     app.openPost $posts.find (post) -> post.id is parseInt data.post
+  
+document.querySelector('#yaml').addEventListener 'keydown', (event) ->
+  keycode = event.keyCode
+  if keycode is 9
+    event.preventDefault()
+    selectionStart = @selectionStart
+    @value = "#{@value.substring(0, @selectionStart)}    #{@value.substring(@selectionEnd)}"
+    @selectionEnd = selectionStart + 4
+  else if event.ctrlKey and keycode is 83
+    event.preventDefault()
+    document.querySelector("#update").click()

@@ -19,6 +19,8 @@
             %span.category Settings
             %div.button(:class='currentButton("settings")')
                 %a(href='#page=settings') General
+            %div.button(:class='currentButton("import")')
+                %a(href='#page=import') Import
             %div#main-page
                 %a(href='/') Main page
         %div#main-area
@@ -63,7 +65,7 @@
                                     name='published'
                                     value='true')
                         {{ actions.publish }}
-                    %button#delete(type='sumbit'
+                    %button#delete(type='submit'
                                    name='delete'
                                    value='true')
                         Delete
@@ -75,6 +77,14 @@
                         %span.publish-status(:class='publishStatus(post.published)')
                             {{ post.published? 'Published' : 'Unpublished' }}
             %div.page#settings(:class='currentPage("settings")')
-                %div#settings-not-ready
-                    Please edit your /app/config.yaml file. This page is not ready yet.
+                %form(action='/admin/settings/update'
+                      method='post')
+                    %textarea#yaml(name='yaml')= YAML.dump @site.preferences, indentation: 4
+                    %button#update(type='sumbit' name='sumbit' value='update') Update
+                    %div#version= "Pisatel #{settings.version}"
+                        
+            %div.page#import(:class='currentPage("import")')
+                %h1 Import from Ghost
+                %p
+                    It's not ready yet.
 

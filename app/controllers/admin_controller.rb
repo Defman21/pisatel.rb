@@ -27,9 +27,11 @@ query {
     redirect '/admin'
   end
   
-  before '/posts/*' do
+  before %r{/(settings|posts)/?.*} do
     unless session['is_admin']
       redirect '/admin'
+    else
+      pass
     end
   end
   
@@ -51,6 +53,18 @@ mutation addPost($post: PostInputType!) {
 }
 |, {'post' => params}
     redirect '/admin#page=posts'
+  end
+  
+  get '/settings/json' do
+    json settings.site.preferences
+  end
+  
+  post '/settings/update' do
+    yaml = params['yaml']
+    @prefs = settings.site
+    @prefs.preferences = YAML.load yaml
+    @prefs.save
+    redirect '/admin#page=settings'
   end
   
   post '/posts/update' do

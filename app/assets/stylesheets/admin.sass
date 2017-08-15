@@ -116,7 +116,7 @@
                         &.unpublished
                             color: $published-status-unpublished
             
-            &#new-post, &#update-post
+            &#new-post, &#update-post, &#settings
                 max-width: $container-max-width
                 width: $container-width
                 margin: 0 auto
@@ -126,7 +126,7 @@
                     padding: 0
                     height: 60vh
                 
-                input[name='title']
+                input[name='title'], input[name='name']
                     font-size: $font-size-x
                     color: $foreground
                     font-weight: bold
@@ -170,8 +170,21 @@
                         color: $button-delete-foreground
                     
             &#settings
-            
-                #settings-not-ready
-                    font-size: $font-size-xx
+                textarea#yaml
+                    border-radius: 4px
+                    margin: 1rem 0
+                    height: 80vh
+                    padding: 5px
+                    background: $post-code-block-background
+                    color: $post-code-block-foreground
+                    font-family: monospace
+                    overflow-x: auto
+                    resize: no
+                    
+                #update
+                    background: $button-submit-background
+                    color: $button-submit-foreground
+                #version
+                    color: $version
                     text-align: center
-                    font-weight: bold
+                    margin-top: 1rem
