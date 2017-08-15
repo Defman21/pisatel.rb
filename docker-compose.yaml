@@ -11,7 +11,6 @@ services:
             - ./app/:/usr/src/app/app/
         environment:
             - RACK_ENV=production
-            - USE_SOCKET=0
         ports:
             - 8080:8080
 volumes:
