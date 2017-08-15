@@ -59,7 +59,7 @@ namespace :server do
       puma -p 8080 config.ru
       )
     else
-      puts "Use bundle exec puma -C puma.rb"
+      exec %q(bundle exec puma -C ./puma.rb)
     end
   end
 end
