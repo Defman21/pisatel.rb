@@ -20,5 +20,5 @@ js_injection:
         console.log("This code will be executed when someone will visit /post/:id");
         console.log(post);
     index: |
-        console.log("This code will be executed when someon will visit /");
+        console.log("This code will be executed when someone will visit /");
         console.log('hello world');
