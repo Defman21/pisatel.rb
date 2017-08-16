@@ -10,7 +10,7 @@ Pisatel is a blog engine written in Ruby.
 2. `docker-compose up`
 
 > By default, the application runs in the production mode.
-You can edit the `docker-compose.yaml` and change the `RACK_ENV` variable
+You can edit the `docker-compose.yaml` file and change the `RACK_ENV` variable
 to `development` or `production`.
 
 ### Manual installation
@@ -18,7 +18,8 @@ to `development` or `production`.
 1. Clone the repo.
 2. `bundle install`
 3. `bundle exec sequel db/config.yaml -m db/migrate -e development -E`
-4. `RACK_ENV=development rake server:run`
+4. `cp app/config.example.yaml app/config.yaml`
+5. `RACK_ENV=production rake server:run`
 
 ### Application modes
 
@@ -39,13 +40,25 @@ to `development` or `production`.
 
 ### Database
 
-Install the adapter gem for your database and create the `db/config.yaml` file.
-For the reference, see `db/config.examlpe.yaml`.
+Install the adapter gem for your database and run the application. You'll setup
+everything needed within the site. (host, port, database name, etc.)
+
+Adapters:
+
+* `sqlite://` - `gem "sqlite3"`
+* `mysql://` - `gem "mysql2"`
+* `mysql2://` - `gem "mysql2"`
+* `postgres://` - `gem "pg"`
 
 ### Site
 
-Copy `app/config.example.yaml` to `app/config.yaml`. You can edit it in an
-editor or in the admin panel.
+You can edit your site settings in the admin panel. To enter it, use the
+following credentials:
+
+* Login: `login`
+* Password: `password`
+
+Change them **immediately** on the Settings page!
 
 ### HTTPS
 
