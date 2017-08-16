@@ -39,7 +39,7 @@ YAML
         file.write yaml
         Sequel.connect(YAML.load(yaml)[ENV['RACK_ENV']])
       end
-      IO.popen("sequel db/config.yaml -m db/migrate -e #{ENV['RACK_ENV']} -E 2>&1") do |lines|
+      IO.popen("bundle exec sequel db/config.yaml -m db/migrate -e #{ENV['RACK_ENV']} -E 2>&1") do |lines|
         json({
           result: 'ok',
           output: lines.read
