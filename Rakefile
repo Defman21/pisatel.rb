@@ -30,7 +30,7 @@ namespace :assets do
     
     manifest = Sprockets::Manifest.new env, File.join(public_path, 'manifest.json')
     
-    manifest.compile %w(app.coffee admin.coffee app.sass admin.sass)
+    manifest.compile %w(app.coffee admin.coffee welcome.coffee app.sass admin.sass welcome.sass)
     $logger.info "Compiled #{assets_path} to #{public_path}."
   end
   

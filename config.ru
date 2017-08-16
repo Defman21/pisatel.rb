@@ -87,11 +87,6 @@ module MD
   end
 end
 
-require './db/database'
-
-Dir.glob('./db/models/*.rb').each do |model|
-  require model
-end
 
 Dir.glob('./app/services/*.rb').each do |service|
   require service
@@ -101,5 +96,15 @@ Dir.glob('./app/controllers/*.rb').sort.each do |controller|
   require controller
 end
 
-map('/') { run IndexController }
-map('/admin') { run AdminController }
+if File.exists?('./db/config.yaml')
+  require './db/database'
+  
+  Dir.glob('./db/models/*.rb').each do |model|
+    require model
+  end
+  
+  map('/') { run IndexController }
+  map('/admin') { run AdminController }
+else
+  map('/') { run WelcomeController }
+end

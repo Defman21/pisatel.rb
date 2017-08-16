@@ -41,6 +41,7 @@ query {
     else
       params['published'] = false
     end
+    params.delete('captures')
     GraphQLService.query 'addPost', %|
 mutation addPost($post: PostInputType!) {
   addPost(post: $post) {
@@ -55,10 +56,6 @@ mutation addPost($post: PostInputType!) {
     redirect '/admin#page=posts'
   end
   
-  get '/settings/json' do
-    json settings.site.preferences
-  end
-  
   post '/settings/update' do
     yaml = params['yaml']
     @prefs = settings.site
@@ -69,6 +66,7 @@ mutation addPost($post: PostInputType!) {
   
   post '/posts/update' do
     id = params.delete('id').to_i
+    params.delete('captures')
     unless params['delete'].nil?
       GraphQLService.query 'deletePost', %|
 mutation deletePost($id: Int!) {

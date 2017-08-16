@@ -1,0 +1,44 @@
+%div#main
+    %div#app.container(v-cloak)
+        %h1 Pisatel first-time installation
+        %form(action='/setup' method='post')
+        %select#adapter(name='adapter'
+                        v-model='selected.adapter')
+            %option(disabled) Adapter
+            %option(v-for='adapter in options.adapters'
+                    :value='adapter') {{ adapter }}
+        %div.database-file(v-if='selected.adapter == "sqlite"')
+            %div.input
+                %input#db-file(name='db-file'
+                               v-model='selected.db_file'
+                               placeholder='Path to the db file')
+        %div.database-connection(v-if='selected.adapter != "sqlite"')
+            %div.input
+                %input#host(name='host'
+                            v-model='selected.host'
+                            placeholder='Host')
+            %div.input
+                %input#port(name='port'
+                            v-model='selected.port'
+                            placeholder='Port')
+            %div.input
+                %input#username(name='username'
+                                v-model='selected.username'
+                                placeholder='Database username')
+            %div.input
+                %input#password(name='password'
+                            type='password'
+                            v-model='selected.password'
+                            placeholder='Database password')
+            %div.input
+                %input#database(name='database'
+                                v-model='selected.database'
+                                placeholder='Database name')                 
+        %div.input
+            %button(type='submit'
+                    name='submit'
+                    value='setup'
+                    v-on:click='setup($event)') Setup
+        %pre
+            %code
+                {{ result }}
