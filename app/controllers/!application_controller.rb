@@ -2,7 +2,7 @@ class ApplicationController < Sinatra::Base
   set :root, File.expand_path('../../../', __FILE__)
   set :app_root, File.join(root, 'app')
   
-  set :version, "0.1.1".freeze
+  set :version, "0.2.1".freeze
   
   set :sprockets, Sprockets::Environment.new(root)
   set :assets_prefix, '/assets'

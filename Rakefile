@@ -1,5 +1,5 @@
 require 'rake/tasklib'
-require 'rake/sprocketstask'
+require 'sprockets'
 
 require 'logger'
 

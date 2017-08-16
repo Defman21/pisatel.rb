@@ -2,12 +2,13 @@ FROM ruby:alpine
 
 RUN apk add --update git g++ make sqlite-dev nodejs
 
-WORKDIR /tmp
-COPY Gemfile* ./
-RUN bundle install
+ARG deployment=true
 
-COPY . /usr/src/app
 WORKDIR /usr/src/app
+COPY Gemfile* ./
+RUN if [ "$deployment" = "true" ]; then bundle install --deployment; else bundle install; fi
+
+COPY . ./
 RUN mkdir -p ./tmp/pid
 RUN mkdir -p ./tmp/sock
 RUN mkdir -p ./db/data

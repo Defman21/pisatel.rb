@@ -1,25 +1,6 @@
-require 'sinatra/base'
-require 'sinatra/json'
-require 'sinatra/content_for'
+require 'bundler'
 
-require 'sprockets'
-require 'sprockets-helpers'
-
-require 'logger'
-
-require 'sequel'
-
-require 'redcarpet'
-require 'oj'
-require 'haml'
-require 'sass'
-require 'uglifier'
-require 'coffee-script'
-require 'execjs'
-require 'yaml'
-
-require 'graphql'
-require 'graphql/batch'
+Bundler.require :default, ENV['RACK_ENV'] || 'production'
 
 
 module Logging  
