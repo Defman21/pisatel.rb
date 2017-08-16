@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 echo "Running puma"
 cd /usr/src/app
-if [ ! -f app/config.yaml ]; then
-    cp ./app/config.example.yaml ./app/config.yaml
+if [ ! -f config/app.yaml ]; then
+    cp ./config/app.example.yaml ./config/app.yaml
     echo "Admin panel login: login, password: password"
 fi
-rake assets:recompile && \
-rake server:run
+bundle exec rake assets:recompile && \
+bundle exec rake server:run

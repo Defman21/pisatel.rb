@@ -6,7 +6,9 @@ ARG deployment=true
 
 WORKDIR /usr/src/app
 COPY Gemfile* ./
-RUN if [ "$deployment" = "true" ]; then bundle install --deployment; else bundle install; fi
+RUN if [ "$deployment" == '"true"' ]; then \
+    bundle install --deployment; else \
+    bundle install --no-deployment; fi
 
 COPY . ./
 RUN mkdir -p ./tmp/pid

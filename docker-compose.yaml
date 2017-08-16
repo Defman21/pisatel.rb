@@ -9,10 +9,12 @@ services:
         container_name: pisatel
         tty: true
         volumes:
-            - app:/usr/src/app
+            - conf:/usr/src/app/config
+            - db:/usr/src/app/db/data
         environment:
             - RACK_ENV=production
         ports:
             - 8080:8080
 volumes:
-    app:
+    conf:
+    db:

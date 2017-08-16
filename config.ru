@@ -77,7 +77,7 @@ Dir.glob('./app/controllers/*.rb').sort.each do |controller|
   require controller
 end
 
-if File.exists?('./db/config.yaml')
+if File.exists?('./config/db.yaml')
   require './db/database'
   
   Dir.glob('./db/models/*.rb').each do |model|

@@ -15,6 +15,7 @@ gem 'redcarpet'
 gem 'sqlite3' # relpace with mysql2, pg, etc.
 gem 'sequel'
 gem 'oj'
+gem 'rake'
 
 group :development do
   gem 'rerun', github: 'alexch/rerun'

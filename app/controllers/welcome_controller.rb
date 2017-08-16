@@ -9,7 +9,7 @@ class WelcomeController < ApplicationController
   post '/setup' do
     begin
       data = Oj.load params['json']
-      File.open(File.join(settings.root, 'db/config.yaml'), "w+") do |file|
+      File.open(File.join(settings.root, 'config/db.yaml'), "w+") do |file|
         if data['adapter'] == 'sqlite'
           yaml = <<YAML
 ---
@@ -39,7 +39,7 @@ YAML
         file.write yaml
         Sequel.connect(YAML.load(yaml)[ENV['RACK_ENV']])
       end
-      IO.popen("bundle exec sequel db/config.yaml -m db/migrate -e #{ENV['RACK_ENV']} -E 2>&1") do |lines|
+      IO.popen("bundle exec sequel config/db.yaml -m db/migrate -e #{ENV['RACK_ENV']} -E 2>&1") do |lines|
         json({
           result: 'ok',
           output: lines.read
@@ -47,7 +47,7 @@ YAML
       end
     rescue
       require 'fileutils'
-      FileUtils.rm_rf(File.join(settings.root, 'db/config.yaml'))
+      FileUtils.rm_rf(File.join(settings.root, 'config/db.yaml'))
       json({
         error: $!
       })

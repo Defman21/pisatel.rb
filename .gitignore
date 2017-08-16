@@ -2,5 +2,6 @@ tmp/
 *.db
 *.komodoproject
 .sass-cache
-config.yaml
+config/app.yaml
+config/db.yaml
 public/

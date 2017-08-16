@@ -47,7 +47,7 @@ class ApplicationController < Sinatra::Base
 
   set :haml, format: :html5
   set :views, File.expand_path('../../views', __FILE__)
-  set :site, Preferences.new(File.join(app_root, 'config.yaml'))
+  set :site, Preferences.new(File.join(root, 'config/app.yaml'))
 
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',

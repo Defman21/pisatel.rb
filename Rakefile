@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.setup
 require 'rake/tasklib'
 require 'sprockets'
 
